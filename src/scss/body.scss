@@ -1,0 +1,13 @@
+@import './mixins.scss';
+
+.body {
+  @include reset;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+@media screen and (max-width: 620px) {
+  .body {
+    flex-direction: column;
+  }
+}

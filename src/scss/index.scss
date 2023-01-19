@@ -1,0 +1,11 @@
+@import '../vendor/fonts/Inter/inter.css';
+@import './list';
+@import './main-page.scss';
+@import './body.scss';
+@import './footer.scss';
+@import './popup.scss';
+@import './header.scss';
+
+body {
+  @include reset;
+}

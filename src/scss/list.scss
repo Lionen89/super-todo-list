@@ -1,0 +1,88 @@
+@import './mixins.scss';
+.list {
+  @include size(70vh, 25%);
+  background-color: #181429;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  &__title {
+    @include text-format(400, 18px, 22px);
+    @include reset;
+    margin: 10px 0 20px 15px;
+    color: #867ea6;
+    text-align: start;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    &-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  &__text {
+    @include reset;
+    @include text-format(200, 14px, 18px);
+    color: #867ea6;
+    pointer-events: none;
+    user-select: none;
+    &-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 15px;
+      padding-bottom: 10px;
+      cursor: move;
+      border-bottom: 1px solid white;
+    }
+    &-remove-button {
+      @include reset;
+      background-image: url(../images/Close_Icon.svg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      @include size(10px, 10px);
+      background-color: transparent;
+      border: none;
+      margin-right: 15px;
+      cursor: pointer;
+      &:hover {
+        opacity: 60%;
+      }
+    }
+  }
+  &__button {
+    @include size(30px, 50%);
+    margin: 0 auto;
+    border-radius: 5px;
+    background-color: #919ac7;
+    color: #545454;
+    cursor: pointer;
+    &:hover {
+      opacity: 60%;
+    }
+  }
+  &__close-button {
+    background-image: url(../images/Close_Icon.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    @include size(20px, 20px);
+    background-color: transparent;
+    margin-right: 15px;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    &:hover {
+      opacity: 60%;
+    }
+  }
+}
+@media screen and (max-width: 620px) {
+  .list {
+    @include size(fit-content, 100%);
+    &__button {
+      margin-bottom: 10px;
+    }
+  }
+}

@@ -1,0 +1,27 @@
+@import './mixins.scss';
+
+.footer {
+  margin-top: 37px;
+  padding-bottom: 30px;
+  &__copiright {
+    @include text-format(normal, 18px, 22px);
+    color: #545454;
+    @include reset;
+  }
+}
+@media screen and (max-width: 1124px) {
+  .footer {
+    margin-top: 28px;
+    padding-bottom: 23px;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .footer {
+    margin-top: 18px;
+    padding-bottom: 16px;
+    &__copiright {
+      @include text-format(normal, 14px, 17px);
+    }
+  }
+}

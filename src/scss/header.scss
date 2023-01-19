@@ -1,0 +1,27 @@
+@import './mixins.scss';
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &__title {
+    @include reset;
+    @include text-format(900, 36px, 48px);
+    color: #545454;
+    text-align: center;
+    padding: 20px 0 10px;
+  }
+  &__button {
+    @include reset;
+    @include size(40px, 40%);
+    @include text-format(200, 18px, 18px);
+    background-color: #181429;
+    color: #867ea6;
+    border: none;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    &:hover {
+      opacity: 60%;
+    }
+  }
+}
