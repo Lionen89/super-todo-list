@@ -51,7 +51,12 @@ const listSlice = createSlice({
       const index = findIndex(state.list, action.payload);
       state.list.splice(index, 1);
     },
+
+    dragTask(state, action) {
+      console.log(action.payload);
+      // removeTask(action);
+    },
   },
 });
 export default listSlice.reducer;
-export const { addList, addTaskList, removeTask, removeList } = listSlice.actions;
+export const { addList, addTaskList, removeTask, removeList, dragTask } = listSlice.actions;

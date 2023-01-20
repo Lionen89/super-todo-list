@@ -4,7 +4,7 @@ import Header from './Header';
 import Footer from './Footer';
 import AddListPopup from './AddListPopup';
 import { useDispatch, useSelector } from 'react-redux';
-import { addList, addTaskList, removeTask, removeList } from '../redux/listSlice';
+import { addList, addTaskList, removeTask, removeList, dragTask } from '../redux/listSlice';
 import AddTaskPopup from './AddTaskPopup';
 
 function App() {
@@ -46,6 +46,10 @@ function App() {
     dispatch(removeTask({ selectedListId, selectedTaskId }));
   }
 
+  function taskDropHendler(currentTask, task, list) {
+    dispatch(dragTask({ currentTask, task, list }));
+  }
+
   return (
     <div className="main-page">
       <div className="main-page__container">
@@ -59,6 +63,7 @@ function App() {
                 onOpenPopup={handleTaskPopupOpen}
                 onRemoveList={handleListRemove}
                 onRemoveTask={handleTaskRemove}
+                onDrop={taskDropHendler}
               />
             );
           })}
