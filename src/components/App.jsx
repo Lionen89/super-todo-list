@@ -11,6 +11,7 @@ function App() {
   const [isAddTaskPopupOpen, setIsAddTaskPopupOpen] = useState(false);
   const [isAddListPopupOpen, setIsAddListkPopupOpen] = useState(false);
   const [currentListId, setCurrentListId] = useState(0);
+  const [dragtTask, setDrag] = React.useState(null);
 
   const dispatch = useDispatch();
   const list = useSelector((state) => state.list);
@@ -45,9 +46,16 @@ function App() {
     const selectedListId = target.parentElement.parentElement.firstChild.firstChild.id;
     dispatch(removeTask({ selectedListId, selectedTaskId }));
   }
+  function taskDragHendler(dragtTask, dragListId) {
+    setDrag(dragtTask);
+    setCurrentListId(dragListId);
+  }
+  function taskDropHendler(task, list) {
+    const selectedTaskId = dragtTask.id;
+    const selectedListId = currentListId;
 
-  function taskDropHendler(currentTask, task, list) {
-    dispatch(dragTask({ currentTask, task, list }));
+    dispatch(removeTask({ selectedListId, selectedTaskId }));
+    dispatch(dragTask({ dragtTask, task, list }));
   }
 
   return (
@@ -64,6 +72,7 @@ function App() {
                 onRemoveList={handleListRemove}
                 onRemoveTask={handleTaskRemove}
                 onDrop={taskDropHendler}
+                onDrag={taskDragHendler}
               />
             );
           })}

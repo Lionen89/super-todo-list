@@ -54,7 +54,15 @@ const listSlice = createSlice({
 
     dragTask(state, action) {
       console.log(action.payload);
-      // removeTask(action);
+      const listIndex = findIndex(state.list, action.payload.list.id);
+      const taskDropIndex =
+        action.payload.task == null
+          ? -1
+          : findIndex(state.list[listIndex].taskList, action.payload.task.id);
+
+      action.payload.task == null
+        ? (state.list[listIndex].taskList = [action.payload.dragtTask])
+        : state.list[listIndex].taskList.splice(taskDropIndex + 1, 0, action.payload.dragtTask);
     },
   },
 });

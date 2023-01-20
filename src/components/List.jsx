@@ -1,8 +1,6 @@
 import React from 'react';
 
-function List({ list, onOpenPopup, onRemoveList, onRemoveTask, onDrop }) {
-  const [currentTask, setCurrentTask] = React.useState(null);
-
+function List({ list, onOpenPopup, onRemoveList, onRemoveTask, onDrop, onDrag }) {
   function dragOverHandler(e) {
     e.preventDefault();
     if (e.target.className == 'list__text-container') {
@@ -13,18 +11,24 @@ function List({ list, onOpenPopup, onRemoveList, onRemoveTask, onDrop }) {
     e.target.style.boxShadow = 'none';
   }
   function dragStartHandler(e, task) {
-    setCurrentTask(task);
+    onDrag(task, list.id);
   }
   function dragEndHandler(e) {
     e.target.style.boxShadow = 'none';
   }
   function dropHandler(e, task) {
     e.preventDefault();
-    onDrop(currentTask, task, list);
+    onDrop(task, list);
+    e.target.style.boxShadow = 'none';
+  }
+  function dropListHndler(e) {
+    e.preventDefault();
+    onDrop(null, list);
+    e.target.style.boxShadow = 'none';
   }
 
   return (
-    <div className="list">
+    <div className="list" onDragOver={(e) => dragOverHandler(e)} onDrop={(e) => dropListHndler(e)}>
       <div className="list__title-container">
         <h2 className="list__title" id={list.id}>
           {list.name}

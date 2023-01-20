@@ -24,7 +24,7 @@ function AddTaskPopup({ isOpen, onClose, onSubmit }) {
           id="name-input"
           name="name"
           required
-          minLength="2"
+          minLength="1"
           maxLength="200"
           value={name}
           placeholder="Task name"
@@ -39,7 +39,7 @@ function AddTaskPopup({ isOpen, onClose, onSubmit }) {
           className="popup__input popup__text"
           id="description-input"
           name="description"
-          minLength="2"
+          minLength="1"
           maxLength="1000"
           placeholder="Description"
           value={description}
