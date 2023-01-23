@@ -1,6 +1,7 @@
 import React from 'react';
 
 function List({ list, onOpenPopup, onRemoveList, onRemoveTask, onDrop, onDrag }) {
+  let onDropTask = 0;
   function dragOverHandler(e) {
     e.preventDefault();
     if (e.target.className == 'list__text-container') {
@@ -18,14 +19,19 @@ function List({ list, onOpenPopup, onRemoveList, onRemoveTask, onDrop, onDrag })
   }
   function dropHandler(e, task) {
     e.preventDefault();
+    onDropTask = 1;
     onDrop(task, list);
     e.target.style.boxShadow = 'none';
   }
   function dropListHndler(e) {
     e.preventDefault();
-    onDrop(null, list);
-    e.target.style.boxShadow = 'none';
+    if (!onDropTask) onDrop(null, list);
+    return;
   }
+
+  React.useEffect(() => {
+    return () => (onDropTask = 0);
+  });
 
   return (
     <div className="list" onDragOver={(e) => dragOverHandler(e)} onDrop={(e) => dropListHndler(e)}>

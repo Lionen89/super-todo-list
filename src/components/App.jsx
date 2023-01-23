@@ -53,11 +53,10 @@ function App() {
   function taskDropHendler(task, list) {
     const selectedTaskId = dragtTask.id;
     const selectedListId = currentListId;
-
     dispatch(removeTask({ selectedListId, selectedTaskId }));
     dispatch(dragTask({ dragtTask, task, list }));
+    setDrag(null);
   }
-
   return (
     <div className="main-page">
       <div className="main-page__container">

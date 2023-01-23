@@ -2,9 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   list: [
-    { name: 'Backlog', id: 1 },
-    { name: 'To Do', id: 2 },
-    { name: 'Done', id: 3 },
+    { name: 'Backlog', id: 0 },
+    { name: 'To Do', id: 1 },
+    { name: 'Done', id: 2 },
   ],
 };
 
@@ -44,7 +44,6 @@ const listSlice = createSlice({
     removeTask(state, action) {
       const listIndex = findIndex(state.list, action.payload.selectedListId);
       const taskIndex = findIndex(state.list[listIndex].taskList, action.payload.selectedTaskId);
-
       state.list[listIndex].taskList.splice(taskIndex, 1);
     },
     removeList(state, action) {
@@ -53,16 +52,29 @@ const listSlice = createSlice({
     },
 
     dragTask(state, action) {
-      console.log(action.payload);
       const listIndex = findIndex(state.list, action.payload.list.id);
       const taskDropIndex =
         action.payload.task == null
           ? -1
           : findIndex(state.list[listIndex].taskList, action.payload.task.id);
 
-      action.payload.task == null
-        ? (state.list[listIndex].taskList = [action.payload.dragtTask])
-        : state.list[listIndex].taskList.splice(taskDropIndex + 1, 0, action.payload.dragtTask);
+      state.list[listIndex].taskList == null
+        ? (state.list[listIndex].taskList = [
+            {
+              task: action.payload.dragtTask.task,
+              description: action.payload.dragtTask.description,
+              id: 0,
+            },
+          ])
+        : state.list[listIndex].taskList.splice(
+            taskDropIndex < 0 ? state.list[listIndex].taskList.length + 1 : taskDropIndex + 1,
+            0,
+            {
+              task: action.payload.dragtTask.task,
+              description: action.payload.dragtTask.description,
+              id: state.list[listIndex].taskList.length + 1,
+            },
+          );
     },
   },
 });
