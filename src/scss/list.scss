@@ -28,6 +28,10 @@
     color: #867ea6;
     pointer-events: none;
     user-select: none;
+    &-done {
+      text-decoration: line-through;
+      opacity: 0.5;
+    }
     &-container {
       display: flex;
       justify-content: space-between;
@@ -36,6 +40,9 @@
       padding-bottom: 10px;
       cursor: move;
       border-bottom: 1px solid white;
+      &-done {
+        opacity: 0.5;
+      }
     }
     &-remove-button {
       @include reset;

@@ -47,7 +47,9 @@ function List({ list, onOpenPopup, onRemoveList, onRemoveTask, onDrop, onDrag })
       {list.taskList
         ? list.taskList.map((task, key) => (
             <div
-              className="list__text-container"
+              className={`list__text-container ${
+                list.name === 'Done' ? 'list__text-container-done' : ''
+              }`}
               id={task.id}
               key={key}
               draggable="true"
@@ -56,7 +58,9 @@ function List({ list, onOpenPopup, onRemoveList, onRemoveTask, onDrop, onDrag })
               onDragStart={(e) => dragStartHandler(e, task)}
               onDragEnd={(e) => dragEndHandler(e)}
               onDrop={(e) => dropHandler(e, task)}>
-              <p className="list__text">{task.task}</p>
+              <p className={`list__text ${list.name === 'Done' ? 'list__text-done' : ''}`}>
+                {task.task}
+              </p>
               <button
                 type="button"
                 className="list__text-remove-button"

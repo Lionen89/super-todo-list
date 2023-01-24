@@ -4,7 +4,7 @@ import Header from './Header';
 import Footer from './Footer';
 import AddListPopup from './AddListPopup';
 import { useDispatch, useSelector } from 'react-redux';
-import { addList, addTaskList, removeTask, removeList, dragTask } from '../redux/listSlice';
+import { addList, addTask, removeTask, removeList, dragTask } from '../redux/listSlice';
 import AddTaskPopup from './AddTaskPopup';
 
 function App() {
@@ -15,6 +15,7 @@ function App() {
 
   const dispatch = useDispatch();
   const list = useSelector((state) => state.list);
+  console.log(list);
 
   function handleAddNewList(listName) {
     dispatch(addList(listName));
@@ -22,7 +23,7 @@ function App() {
   }
 
   function handleAddNewTask(task, description) {
-    dispatch(addTaskList({ task, description, currentListId }));
+    dispatch(addTask({ task, description, currentListId }));
     handlePopupClose();
   }
 

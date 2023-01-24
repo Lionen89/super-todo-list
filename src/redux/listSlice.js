@@ -20,15 +20,28 @@ const listSlice = createSlice({
     addList(state, action) {
       state.list.unshift({ name: action.payload, id: state.list.length + 1 });
     },
-    addTaskList(state, action) {
+    addTask(state, action) {
       const index = findIndex(state.list, action.payload.currentListId);
+      let numbers;
+      const arr = state.list.map((element) => {
+        numbers =
+          element.taskList != null
+            ? Math.max(
+                ...element.taskList.map((i) => {
+                  return i.id;
+                }),
+              )
+            : 0;
+        return numbers;
+      });
+      let newId = Math.max(...arr);
 
       if (state.list[index].taskList === undefined) {
         state.list[index].taskList = [
           {
             task: action.payload.task,
             description: action.payload.description,
-            id: 0,
+            id: newId + 1,
           },
         ];
       } else
@@ -37,7 +50,7 @@ const listSlice = createSlice({
           {
             task: action.payload.task,
             description: action.payload.description,
-            id: state.list[index].taskList.length + 1,
+            id: newId + 1,
           },
         ];
     },
@@ -57,26 +70,25 @@ const listSlice = createSlice({
         action.payload.task == null
           ? -1
           : findIndex(state.list[listIndex].taskList, action.payload.task.id);
+      console.log('action.payload.list.taskList', action.payload.list.taskList);
+      console.log('action.payload.dragtTask', action.payload.dragtTask);
 
       state.list[listIndex].taskList == null
         ? (state.list[listIndex].taskList = [
             {
               task: action.payload.dragtTask.task,
               description: action.payload.dragtTask.description,
-              id: 0,
+              id: action.payload.dragtTask.id,
             },
           ])
         : state.list[listIndex].taskList.splice(
             taskDropIndex < 0 ? state.list[listIndex].taskList.length + 1 : taskDropIndex + 1,
             0,
-            {
-              task: action.payload.dragtTask.task,
-              description: action.payload.dragtTask.description,
-              id: state.list[listIndex].taskList.length + 1,
-            },
+            action.payload.dragtTask,
           );
+      console.log(state.list[listIndex].taskList);
     },
   },
 });
 export default listSlice.reducer;
-export const { addList, addTaskList, removeTask, removeList, dragTask } = listSlice.actions;
+export const { addList, addTask, removeTask, removeList, dragTask } = listSlice.actions;
