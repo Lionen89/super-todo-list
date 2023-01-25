@@ -15,7 +15,6 @@ function App() {
 
   const dispatch = useDispatch();
   const list = useSelector((state) => state.list);
-  console.log(list);
 
   function handleAddNewList(listName) {
     dispatch(addList(listName));

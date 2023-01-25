@@ -70,8 +70,6 @@ const listSlice = createSlice({
         action.payload.task == null
           ? -1
           : findIndex(state.list[listIndex].taskList, action.payload.task.id);
-      console.log('action.payload.list.taskList', action.payload.list.taskList);
-      console.log('action.payload.dragtTask', action.payload.dragtTask);
 
       state.list[listIndex].taskList == null
         ? (state.list[listIndex].taskList = [
@@ -86,7 +84,6 @@ const listSlice = createSlice({
             0,
             action.payload.dragtTask,
           );
-      console.log(state.list[listIndex].taskList);
     },
   },
 });

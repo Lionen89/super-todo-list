@@ -4,7 +4,7 @@ function List({ list, onOpenPopup, onRemoveList, onRemoveTask, onDrop, onDrag })
   let onDropTask = 0;
   function dragOverHandler(e) {
     e.preventDefault();
-    if (e.target.className == 'list__text-container') {
+    if (e.target.className.includes('list__text-container')) {
       e.target.style.boxShadow = '0 2px 3px red';
     }
   }
@@ -19,9 +19,9 @@ function List({ list, onOpenPopup, onRemoveList, onRemoveTask, onDrop, onDrag })
   }
   function dropHandler(e, task) {
     e.preventDefault();
+    e.target.style.boxShadow = 'none';
     onDropTask = 1;
     onDrop(task, list);
-    e.target.style.boxShadow = 'none';
   }
   function dropListHndler(e) {
     e.preventDefault();
