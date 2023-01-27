@@ -1,7 +1,8 @@
 import React from 'react';
 
-function List({ list, onOpenPopup, onRemoveList, onRemoveTask, onDrop, onDrag }) {
+function List({ list, onAddTaskPopup, onTaskPopup, onRemoveList, onRemoveTask, onDrop, onDrag }) {
   let onDropTask = 0;
+  debugger;
   function dragOverHandler(e) {
     e.preventDefault();
     if (e.target.className.includes('list__text-container')) {
@@ -57,7 +58,8 @@ function List({ list, onOpenPopup, onRemoveList, onRemoveTask, onDrop, onDrag })
               onDragLeave={(e) => dragLeaveHandler(e)}
               onDragStart={(e) => dragStartHandler(e, task)}
               onDragEnd={(e) => dragEndHandler(e)}
-              onDrop={(e) => dropHandler(e, task)}>
+              onDrop={(e) => dropHandler(e, task)}
+              onClick={() => onTaskPopup(task)}>
               <p className={`list__text ${list.name === 'Done' ? 'list__text-done' : ''}`}>
                 {task.task}
               </p>
@@ -68,7 +70,7 @@ function List({ list, onOpenPopup, onRemoveList, onRemoveTask, onDrop, onDrag })
             </div>
           ))
         : ''}
-      <button className="list__button" onClick={(e) => onOpenPopup(e.target)}>
+      <button className="list__button" onClick={(e) => onAddTaskPopup(e.target)}>
         Add Task
       </button>
     </div>

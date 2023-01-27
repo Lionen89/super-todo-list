@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 import Popup from './Popup';
 
-function TaskPopup({ isOpen, onClose, onSubmit }) {
+function TaskPopup({ task, isOpen, onClose, onSubmit }) {
   const [name, setName] = useState('');
   const [description, setdDescription] = useState('');
+  const [isImputAvaible, setIsImputAvaible] = useState(false);
+
+  const handleInputAvaible = () => {
+    setIsImputAvaible(!isImputAvaible);
+  };
+
   const handleClosePopup = () => {
     onClose();
     setName('');
     setdDescription('');
+    setIsImputAvaible(false);
   };
   function handleSubmit(e) {
     e.preventDefault();
@@ -16,18 +23,25 @@ function TaskPopup({ isOpen, onClose, onSubmit }) {
   }
 
   return (
-    <Popup title="Add Tsk" isOpen={isOpen} onClose={handleClosePopup} onSubmit={handleSubmit}>
+    <Popup title="Task editor" isOpen={isOpen} onClose={handleClosePopup} onSubmit={handleSubmit}>
       <label className="popup__form-field">
+        <h2
+          className={`popup__text popup__text-task ${
+            isImputAvaible ? 'popup__input-unavaible' : ''
+          }`}
+          onClick={handleInputAvaible}>
+          {task ? task.task : ''}
+        </h2>
         <input
           type="text"
-          className="popup__input popup__text"
+          className={`popup__input popup__text ${!isImputAvaible ? 'popup__input-unavaible' : ''}`}
           id="name-input"
           name="name"
           required
           minLength="1"
           maxLength="200"
-          value={name}
-          placeholder="Task name"
+          value={task ? task.task : name}
+          placeholder={task ? task.task : name}
           onChange={(e) => {
             setName(e.target.value);
           }}

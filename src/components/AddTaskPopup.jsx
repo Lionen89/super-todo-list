@@ -16,7 +16,7 @@ function AddTaskPopup({ isOpen, onClose, onSubmit }) {
   }
 
   return (
-    <Popup title="Add Tsk" isOpen={isOpen} onClose={handleClosePopup} onSubmit={handleSubmit}>
+    <Popup title="Add Task" isOpen={isOpen} onClose={handleClosePopup} onSubmit={handleSubmit}>
       <label className="popup__form-field">
         <input
           type="text"

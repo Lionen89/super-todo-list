@@ -16,6 +16,12 @@
     visibility: visible;
     opacity: 1;
   }
+  &__input {
+    margin-bottom: 30px;
+    &-unavaible {
+      display: none;
+    }
+  }
   &__container {
     width: 100vw;
     max-width: 430px;
@@ -56,6 +62,9 @@
     border-bottom: 1px solid rgb(0, 0, 0, 0.2);
     padding: 0;
     margin-left: 36px;
+    &-task {
+      border-bottom: none;
+    }
     &:first-child {
       margin-bottom: 30px;
     }
