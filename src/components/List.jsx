@@ -2,7 +2,6 @@ import React from 'react';
 
 function List({ list, onAddTaskPopup, onTaskPopup, onRemoveList, onRemoveTask, onDrop, onDrag }) {
   let onDropTask = 0;
-  debugger;
   function dragOverHandler(e) {
     e.preventDefault();
     if (e.target.className.includes('list__text-container')) {

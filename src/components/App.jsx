@@ -35,7 +35,6 @@ function App() {
   }
 
   function handleTaskPopupOpen(task) {
-    console.log(task);
     setCurrentTask(task);
     setIsTaskPopupOpen(true);
   }
