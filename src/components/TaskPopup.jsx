@@ -51,8 +51,8 @@ function TaskPopup({ task, isOpen, onClose, onSubmit }) {
         />
       </label>
       <label className="popup__form-field">
-        {/* <TextEditor task={task} />; */}
-        <textarea
+        <TextEditor task={task} />
+        {/* <textarea
           type="text"
           className="popup__input popup__text"
           id="description-input"
@@ -64,7 +64,7 @@ function TaskPopup({ task, isOpen, onClose, onSubmit }) {
             setdDescription(e.target.value);
           }}>
           {task ? task.description : ''}
-        </textarea>
+        </textarea> */}
       </label>
     </Popup>
   );

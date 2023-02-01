@@ -1,17 +1,19 @@
 import React from 'react';
-import { Editor, EditorState } from 'draft-js';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const TextEditor = (task) => {
-  const [editorState, setEditorState] = React.useState(() =>
-    EditorState.createEmpty(task ? task.description : ''),
-  );
+  const [value, setValue] = React.useState(task ? task.description : '');
 
   return (
-    <Editor
-      editorState={editorState}
-      onChange={setEditorState}
+    <ReactQuill
+      theme="snow"
+      value={value}
+      onChange={setValue}
       placeholder={task ? task.description : ''}
-    />
+      className="popup__text-editor">
+      {task ? task.description : ''}
+    </ReactQuill>
   );
 };
 
