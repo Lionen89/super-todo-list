@@ -3,17 +3,22 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 const TextEditor = (task) => {
-  const [value, setValue] = React.useState(task ? task.description : '');
+  const [value, setValue] = React.useState(task.task ? task.task.description : '');
+
+  console.log(task.task ? task.task.description : '');
+  console.log(value);
 
   return (
     <ReactQuill
       theme="snow"
       value={value}
       onChange={setValue}
-      placeholder={task ? task.description : ''}
-      className="popup__text-editor">
-      {task ? task.description : ''}
-    </ReactQuill>
+      modules={{
+        toolbar: [[{ header: [1, 2, false] }], ['bold', 'italic', 'underline'], ['link', 'image']],
+      }}
+      formats={['header', 'bold', 'italic', 'underline', 'link', 'image']}
+      customModules={{ toolbar: 'ql-toolbar' }}
+    />
   );
 };
 
